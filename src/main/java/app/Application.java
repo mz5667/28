@@ -11,6 +11,8 @@ import panels.PanelLog;
 import panels.PanelRendering;
 
 import java.io.File;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.function.Consumer;
 
 import static app.Colors.*;
@@ -47,7 +49,10 @@ public class Application implements Consumer<Event> {
      * панель событий
      */
     private final PanelLog panelLog;
-
+    /**
+     * время последнего нажатия клавиши мыши
+     */
+    Date prevEventMouseButtonTime;
 
     /**
      * Конструктор окна приложения
@@ -124,6 +129,21 @@ public class Application implements Consumer<Event> {
      */
     @Override
     public void accept(Event e) {
+        // если событие кнопка мыши
+        if (e instanceof EventMouseButton) {
+            // получаем текущие дату и время
+            Date now = Calendar.getInstance().getTime();
+            // если уже было нажатие
+            if (prevEventMouseButtonTime != null) {
+                // если между ними прошло больше 200 мс
+                long delta = now.getTime() - prevEventMouseButtonTime.getTime();
+                if (delta < 200)
+                    return;
+            }
+            // сохраняем время последнего события
+            prevEventMouseButtonTime = now;
+        }
+
         // если событие - это закрытие окна
         if (e instanceof EventWindowClose) {
             // завершаем работу приложения
