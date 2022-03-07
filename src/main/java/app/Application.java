@@ -55,19 +55,6 @@ public class Application implements Consumer<Event> {
     public Application() {
         // создаём окно
         window = App.makeWindow();
-        // задаём обработчиком событий текущий объект
-        window.setEventListener(this);
-        // задаём заголовок
-        window.setTitle("Java 2D");
-        // задаём размер окна
-        window.setWindowSize(900, 900);
-        // задаём его положение
-        window.setWindowPosition(100, 100);
-        // задаём иконку
-        switch (Platform.CURRENT) {
-            case WINDOWS -> window.setIcon(new File("src/main/resources/windows.ico"));
-            case MACOS -> window.setIcon(new File("src/main/resources/macos.icns"));
-        }
 
         // создаём панель рисования
         panelRendering = new PanelRendering(
@@ -89,6 +76,21 @@ public class Application implements Consumer<Event> {
                 window, true, PANEL_BACKGROUND_COLOR, PANEL_PADDING, 5, 3, 3, 2,
                 2, 1
         );
+
+        // задаём обработчиком событий текущий объект
+        window.setEventListener(this);
+        // задаём заголовок
+        window.setTitle("Java 2D");
+        // задаём размер окна
+        window.setWindowSize(900, 900);
+        // задаём его положение
+        window.setWindowPosition(100, 100);
+
+        // задаём иконку
+        switch (Platform.CURRENT) {
+            case WINDOWS -> window.setIcon(new File("src/main/resources/windows.ico"));
+            case MACOS -> window.setIcon(new File("src/main/resources/macos.icns"));
+        }
 
         // названия слоёв, которые будем перебирать
         String[] layerNames = new String[]{
@@ -133,6 +135,11 @@ public class Application implements Consumer<Event> {
             paint(s.getCanvas(), new CoordinateSystem2i(0, 0, s.getWidth(), s.getHeight())
             );
         }
+
+        // передаём события на обработку панелям
+        panelControl.accept(e);
+        panelRendering.accept(e);
+        panelLog.accept(e);
     }
 
     /**
