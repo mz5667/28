@@ -7,6 +7,7 @@ import controls.Input;
 import controls.InputFactory;
 import controls.Label;
 import controls.MultiLineLabel;
+import dialogs.PanelInfo;
 import io.github.humbleui.jwm.*;
 import io.github.humbleui.skija.Canvas;
 import misc.CoordinateSystem2i;
@@ -153,7 +154,10 @@ public class PanelControl extends GridPanel {
                 window, false, backgroundColor, PANEL_PADDING,
                 6, 7, 0, 5, 3, 1, "Загрузить",
                 true, true);
-        load.setOnClick(PanelRendering::load);
+        load.setOnClick(() -> {
+            PanelRendering.load();
+            cancelTask();
+        });
         buttons.add(load);
 
         Button save = new Button(
@@ -181,6 +185,7 @@ public class PanelControl extends GridPanel {
                         "Пересечений: " + PanelRendering.task.getCrossed().size() / 2 + "\n" +
                         "Отдельных точек: " + PanelRendering.task.getSingle().size();
 
+                PanelInfo.show(s + "\n\nНажмите Esc, чтобы вернуться");
                 PanelLog.success(s);
                 solve.text = "Сбросить";
             } else {
