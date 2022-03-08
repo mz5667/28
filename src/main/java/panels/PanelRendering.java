@@ -1,19 +1,22 @@
 package panels;
 
-import app.Point;
 import app.Task;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.humbleui.jwm.Event;
 import io.github.humbleui.jwm.EventMouseButton;
+import io.github.humbleui.jwm.EventMouseScroll;
 import io.github.humbleui.jwm.Window;
 import io.github.humbleui.skija.Canvas;
 import misc.CoordinateSystem2d;
 import misc.CoordinateSystem2i;
+import misc.Stats;
 import misc.Vector2d;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import static app.Fonts.FONT12;
 
 
 /**
@@ -24,6 +27,10 @@ public class PanelRendering extends GridPanel {
      * Представление проблемы
      */
     public static Task task;
+    /**
+     * Статистика fps
+     */
+    private final Stats fpsStats = new Stats();
 
     /**
      * Панель управления
@@ -65,12 +72,13 @@ public class PanelRendering extends GridPanel {
     @Override
     public void accept(Event e) {
         super.accept(e);
-        if (e instanceof EventMouseButton ee) {
-            // если последнее положение мыши сохранено и курсор был внутри
-            if (lastMove != null && lastInside) {
-                // обрабатываем клик по задаче
+        if (e instanceof EventMouseScroll ee) {
+            if (lastMove != null && lastInside)
+                task.scale(ee.getDeltaY(), lastWindowCS.getRelativePos(lastMove));
+            window.requestFrame();
+        } else if (e instanceof EventMouseButton ee) {
+            if (lastMove != null && lastInside)
                 task.click(lastWindowCS.getRelativePos(lastMove), ee.getButton());
-            }
         }
     }
 
@@ -82,7 +90,13 @@ public class PanelRendering extends GridPanel {
      */
     @Override
     public void paintImpl(Canvas canvas, CoordinateSystem2i windowCS) {
+        // рисуем задачу
         task.paint(canvas, windowCS);
+        // рисуем статистику фпс
+        fpsStats.paint(canvas, windowCS, FONT12, padding);
+        // рисуем перекрестие, если мышь внутри области рисования этой панели
+        if (lastInside && lastMove != null)
+            task.paintMouse(canvas, windowCS, FONT12, lastWindowCS.getRelativePos(lastMove));
     }
 
     /**
@@ -124,4 +138,6 @@ public class PanelRendering extends GridPanel {
         PanelLog.info("load from " + path);
         loadFromFile(path);
     }
+
+
 }
