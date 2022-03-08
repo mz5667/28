@@ -1,5 +1,6 @@
 package app;
 
+import controls.InputFactory;
 import io.github.humbleui.jwm.*;
 import io.github.humbleui.jwm.skija.EventFrameSkija;
 import io.github.humbleui.skija.Canvas;
@@ -34,6 +35,11 @@ public class Application implements Consumer<Event> {
      */
     public static final int C_RAD_IN_PX = 4;
     /**
+     * кнопка изменений: у мака - это `Command`, у windows - `Ctrl`
+     */
+    public static final KeyModifier MODIFIER = Platform.CURRENT == Platform.MACOS ? KeyModifier.MAC_COMMAND : KeyModifier.CONTROL;
+
+    /**
      * панель легенды
      */
     private final PanelHelp panelHelp;
@@ -53,6 +59,10 @@ public class Application implements Consumer<Event> {
      * время последнего нажатия клавиши мыши
      */
     Date prevEventMouseButtonTime;
+    /**
+     * флаг того, что окно развёрнуто на весь экран
+     */
+    private boolean maximizedWindow;
 
     /**
      * Конструктор окна приложения
@@ -143,17 +153,53 @@ public class Application implements Consumer<Event> {
             // сохраняем время последнего события
             prevEventMouseButtonTime = now;
         }
+        // кнопки клавиатуры
+        else if (e instanceof EventKey eventKey) {
+            // кнопка нажата с Ctrl
+            if (eventKey.isPressed()) {
+                if (eventKey.isModifierDown(MODIFIER))
+                    // разбираем, какую именно кнопку нажали
+                    switch (eventKey.getKey()) {
+                        case W -> window.close();
+                        case H -> window.minimize();
+                        case S -> PanelRendering.save();
+                        case O -> PanelRendering.load();
+                        case DIGIT1 -> {
+                            if (maximizedWindow)
+                                window.restore();
+                            else
+                                window.maximize();
+                            maximizedWindow = !maximizedWindow;
+                        }
+                        case DIGIT2 -> window.setOpacity(window.getOpacity() == 1f ? 0.5f : 1f);
+                    }
+                else
+                    switch (eventKey.getKey()) {
+                        case ESCAPE -> {
+                                window.close();
+                                // завершаем обработку, иначе уже разрушенный контекст
+                                // будет передан панелям
+                                return;
 
+                        }
+                        case TAB -> InputFactory.nextTab();
+                    }
+            }
+        }
         // если событие - это закрытие окна
-        if (e instanceof EventWindowClose) {
+        else if (e instanceof EventWindowClose) {
             // завершаем работу приложения
             App.terminate();
+            // закрытие окна
         } else if (e instanceof EventWindowCloseRequest) {
             window.close();
         } else if (e instanceof EventFrameSkija ee) {
             Surface s = ee.getSurface();
             paint(s.getCanvas(), new CoordinateSystem2i(0, 0, s.getWidth(), s.getHeight())
             );
+        } else if (e instanceof EventFrame) {
+            // запускаем рисование кадра
+            window.requestFrame();
         }
 
         // передаём события на обработку панелям
