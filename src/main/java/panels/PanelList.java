@@ -1,6 +1,6 @@
 package panels;
 
-import app.Button;
+import controls.Button;
 import io.github.humbleui.jwm.*;
 import io.github.humbleui.skija.Canvas;
 import io.github.humbleui.skija.Paint;

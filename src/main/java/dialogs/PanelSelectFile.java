@@ -1,7 +1,7 @@
 package dialogs;
 
 import app.Application;
-import app.Button;
+import controls.Button;
 import controls.Input;
 import controls.Label;
 import controls.MultiLineLabel;
