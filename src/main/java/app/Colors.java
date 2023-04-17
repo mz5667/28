@@ -17,7 +17,7 @@ public class Colors {
     /**
      * цвет подложки панелей
      */
-    public static final int PANEL_BACKGROUND_COLOR = Misc.getColor(32, 0, 0, 0);
+    public static final int PANEL_BACKGROUND_COLOR = Misc.getColor(32, 0, 255, 0);
     /**
      * Цвет текста
      */
@@ -29,11 +29,11 @@ public class Colors {
     /**
      * Цвет текста
      */
-    public static final int FIELD_TEXT_COLOR = Misc.getColor(255, 0, 0, 0);
+    public static final int FIELD_TEXT_COLOR = Misc.getColor(255, 78, 0, 150);
     /**
      * Цвет кнопки
      */
-    public static final int BUTTON_COLOR = Misc.getColor(80, 0, 0, 0);   /**
+    public static final int BUTTON_COLOR = Misc.getColor(100, 10, 255, 100);   /**
      * Цвет пересечения
      */
     public static final int CROSSED_COLOR = Misc.getColor(200, 0, 255, 255);
@@ -44,11 +44,11 @@ public class Colors {
     /**
      * Цвет сетки
      */
-    public static final int TASK_GRID_COLOR = Misc.getColor(64, 255, 255, 255);
+    public static final int TASK_GRID_COLOR = Misc.getColor(150, 110, 180, 100);
     /**
      * Цвет подложки
      */
-    public static final int STATS_BACKGROUND_COLOR = Misc.getColor(64, 51, 200, 51);
+    public static final int STATS_BACKGROUND_COLOR = Misc.getColor(64, 10, 255, 10);
     /**
      * Цвет подложки
      */
@@ -64,7 +64,7 @@ public class Colors {
     /**
      * Цвет фона
      */
-    public static final int HELP_TEXT_BACKGROUND = Misc.getColor(50, 0, 0, 0);
+    public static final int HELP_TEXT_BACKGROUND = Misc.getColor(50, 0, 255, 0);
     /**
      * Цвет заливки панели
      */
