@@ -73,63 +73,63 @@ public class PanelControl extends GridPanel {
         // задание
         task = new MultiLineLabel(
                 window, false, backgroundColor, PANEL_PADDING,
-                6, 13, 0, 0, 6, 2, Task.TASK_TEXT,
+                6, 13, 0, 0, 6, 4, Task.TASK_TEXT,
                 false, true);
         // добавление вручную
         Label xLabel = new Label(window, false, backgroundColor, PANEL_PADDING,
-                6, 13, 0, 2, 1, 1, "X", true, true);
+                6, 13, 0, 4, 1, 1, "X", true, true);
         labels.add(xLabel);
         Input xField = InputFactory.getInput(window, false, FIELD_BACKGROUND_COLOR, PANEL_PADDING,
-                6, 13, 1, 2, 2, 1, "0.0", true,
+                6, 13, 1, 4, 2, 1, "0.0", true,
                 FIELD_TEXT_COLOR, true);
         inputs.add(xField);
         Label yLabel = new Label(window, false, backgroundColor, PANEL_PADDING,
-                6, 13, 3, 2, 1, 1, "Y", true, true);
+                6, 13, 3, 4, 1, 1, "Y", true, true);
         labels.add(yLabel);
         Input yField = InputFactory.getInput(window, false, FIELD_BACKGROUND_COLOR, PANEL_PADDING,
-                6, 13, 4, 2, 2, 1, "0.0", true,
+                6, 13, 4, 4, 2, 1, "0.0", true,
                 FIELD_TEXT_COLOR, true);
         inputs.add(yField);
         Label x1Label = new Label(window, false, backgroundColor, PANEL_PADDING,
-                6, 13, 0, 4, 1, 1, "X1", true, true);
+                6, 13, 0, 6, 1, 1, "X1", true, true);
         labels.add(x1Label);
         Input x1Field = InputFactory.getInput(window, false, FIELD_BACKGROUND_COLOR, PANEL_PADDING,
-                6, 13, 1, 4, 2, 1, "0.0", true,
+                6, 13, 1, 6, 2, 1, "0.0", true,
                 FIELD_TEXT_COLOR, true);
         inputs.add(x1Field);
         Label y1Label = new Label(window, false, backgroundColor, PANEL_PADDING,
-                6, 13, 3, 4, 1, 1, "Y1", true, true);
+                6, 13, 3, 6, 1, 1, "Y1", true, true);
         labels.add(y1Label);
         Input y1Field = InputFactory.getInput(window, false, FIELD_BACKGROUND_COLOR, PANEL_PADDING,
-                6, 13, 4, 4, 2, 1, "0.0", true,
+                6, 13, 4, 6, 2, 1, "0.0", true,
                 FIELD_TEXT_COLOR, true);
         inputs.add(y1Field);
         Label x2Label = new Label(window, false, backgroundColor, PANEL_PADDING,
-                6, 13, 0, 5, 1, 1, "X2", true, true);
+                6, 13, 0, 7, 1, 1, "X2", true, true);
         labels.add(x2Label);
         Input x2Field = InputFactory.getInput(window, false, FIELD_BACKGROUND_COLOR, PANEL_PADDING,
-                6, 13, 1, 5, 2, 1, "0.0", true,
+                6, 13, 1, 7, 2, 1, "0.0", true,
                 FIELD_TEXT_COLOR, true);
         inputs.add(x2Field);
         Label y2Label = new Label(window, false, backgroundColor, PANEL_PADDING,
-                6, 13, 3, 5, 1, 1, "Y2", true, true);
+                6, 13, 3, 7, 1, 1, "Y2", true, true);
         labels.add(y2Label);
         Input y2Field = InputFactory.getInput(window, false, FIELD_BACKGROUND_COLOR, PANEL_PADDING,
-                6, 13, 4, 5, 2, 1, "0.0", true,
+                6, 13, 4, 7, 2, 1, "0.0", true,
                 FIELD_TEXT_COLOR, true);
         inputs.add(y2Field);
         Label x3Label = new Label(window, false, backgroundColor, PANEL_PADDING,
-                6, 13, 0, 6, 1, 1, "X3", true, true);
+                6, 13, 0, 8, 1, 1, "X3", true, true);
         labels.add(x3Label);
         Input x3Field = InputFactory.getInput(window, false, FIELD_BACKGROUND_COLOR, PANEL_PADDING,
-                6, 13, 1, 6, 2, 1, "0.0", true,
+                6, 13, 1, 8, 2, 1, "0.0", true,
                 FIELD_TEXT_COLOR, true);
         inputs.add(x3Field);
         Label y3Label = new Label(window, false, backgroundColor, PANEL_PADDING,
-                6, 13, 3, 6, 1, 1, "Y3", true, true);
+                6, 13, 3, 8, 1, 1, "Y3", true, true);
         labels.add(y3Label);
         Input y3Field = InputFactory.getInput(window, false, FIELD_BACKGROUND_COLOR, PANEL_PADDING,
-                6, 13, 4, 6, 2, 1, "0.0", true,
+                6, 13, 4, 8, 2, 1, "0.0", true,
                 FIELD_TEXT_COLOR, true);
         inputs.add(y3Field);
 
@@ -137,17 +137,17 @@ public class PanelControl extends GridPanel {
 
         // случайное добавление
         Label cntLabel = new Label(window, false, backgroundColor, PANEL_PADDING,
-                6, 13, 0, 3, 1, 1, "Кол-во", true, true);
+                6, 13, 0, 5, 1, 1, "Кол-во", true, true);
         labels.add(cntLabel);
 
         Input cntField = InputFactory.getInput(window, false, FIELD_BACKGROUND_COLOR, PANEL_PADDING,
-                6, 13, 1, 3, 2, 1, "5", true,
+                6, 13, 1, 5, 2, 1, "5", true,
                 FIELD_TEXT_COLOR, true);
         inputs.add(cntField);
 
         Button addPoints = new Button(
                 window, false, backgroundColor, PANEL_PADDING,
-                6, 13, 3, 3, 3, 1, "Добавить\nслучайные точки",
+                6, 13, 3, 5, 3, 1, "Добавить\nслучайные точки",
                 true, true);
         addPoints.setOnClick(() -> {
             // если числа введены верно
@@ -159,7 +159,7 @@ public class PanelControl extends GridPanel {
         buttons.add(addPoints);
         Button addPoints1 = new Button(
                 window, false, backgroundColor, PANEL_PADDING,
-                6, 13, 2, 7 , 3, 1, "Добавить\n случайный треугольник",
+                6, 13, 2, 9 , 3, 1, "Добавить\n случайный треугольник",
                 true, true);
         addPoints1.setOnClick(() -> {
             // если числа введены верно
